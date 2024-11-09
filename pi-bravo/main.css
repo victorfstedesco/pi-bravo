@@ -1,0 +1,25 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+    
+    background-color: #fff;
+    border: 1px solid #DEDFE1;
+    padding: 1.5rem;
+
+    & nav{
+        display: flex;
+        gap: 1.5rem;
+
+        min-width: fit-content;
+    }
+
+    & li{
+        display: flex;
+        list-style: none;
+
+        border: 1px solid #DEDFE1;
+        border-radius: 8px;
+        padding: 0.5rem;
+    }
+}

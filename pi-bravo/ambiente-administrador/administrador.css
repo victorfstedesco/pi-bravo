@@ -1,0 +1,21 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+    
+    background-color: #fff;
+    border: 1px solid #DEDFE1;
+    padding: 1.5rem;
+
+    & nav{
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    & li{
+        display: flex;
+        list-style: none;
+
+        padding: 0.5rem;
+    }
+}
