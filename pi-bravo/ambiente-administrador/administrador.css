@@ -1,21 +1,23 @@
-header{
+.content-header{
     display: flex;
-    justify-content: space-between;
-    align-items: center ;
-    
-    background-color: #fff;
-    border: 1px solid #DEDFE1;
-    padding: 1.5rem;
+    justify-content: center;
+    align-items: center;
 
-    & nav{
+    gap: 1.5rem;
+}
+
+.tabela-administrador{
+    display: flex;
+
+    gap: 1.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid #DEDFE1;
+
+    & .status{
         display: flex;
-        gap: 1.5rem;
-    }
+        flex-direction: column;
 
-    & li{
-        display: flex;
-        list-style: none;
-
-        padding: 0.5rem;
+        gap: 8px;
     }
 }
+

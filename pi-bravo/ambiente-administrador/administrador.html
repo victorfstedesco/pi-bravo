@@ -1,3 +1,31 @@
+<?php
+session_start();
+require_once('../php/conexao.php');
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    try {
+        $stmt = $pdo->prepare("DELETE FROM ADMINISTRADOR WHERE ADM_ID = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        header("Location: ambiente-administrador.php");
+        exit(); 
+    } catch (PDOException $e) {
+        header("Location: ambiente-administrador.php");
+        exit();
+    }
+}
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM ADMINISTRADOR");
+    $stmt->execute();
+    $administradores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "<p style='color:red;'>Erro ao listar administradores: " . $e->getMessage() . "</p>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +35,8 @@
 
     <link rel="stylesheet" href="./administrador.css"> <!-- css do arquivo -->
 
-    <link rel="stylesheet" href="../tipografia.css"> <!-- css externo -->
-    <link rel="stylesheet" href="../main.css"> <!-- css externo -->
+    <link rel="stylesheet" href="../css/tipografia.css"> <!-- css externo -->
+    <link rel="stylesheet" href="../css/main.css"> <!-- css externo -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +45,7 @@
 </head>
 <body>
     <main>
+        <!--começo do 'componente' header-->
         <header>
             <nav>
                 <li>Menu</li>
@@ -26,6 +55,48 @@
             </nav>
             <img src="./assets/logo-minimalista.svg" alt="">
         </header>
+        <!--fim do 'componente' header-->
+        <section>
+            <div class="content-header">
+                <h4>Ambiente do adminsitrador</h4>
+                <form method="POST" class="pesquisa-form">
+                    <input type="text" placeholder="Buscar administrador" name="adm_nome" required />
+                    <button type="submit">
+                        <img src="./assets/lupa.svg" alt="search">
+                    </button>
+                </form>
+                <h6 class="fundo1">Cadastrar adminsitrador</h6>
+            </div>
+            <hr>
+            <div class="tabela-administrador">
+                <div class="status">
+                    <p>Status</p>
+                    <div class="ativado">
+                        <img src="../ativado.svg" alt="">
+                        <p>Ativado</p>
+                    </div>
+                </div>
+                <div class="barra"></div>
+                <div class="id">
+                    <p class="nome">ID</p>
+                    <p>113</p>
+                </div>
+                <div class="barra"></div>
+                <div class="categoria">
+                    <p>Categoria</p>
+                </div>
+                <div class="barra"></div>
+                <div class="desc">
+                    <p>Descrição</p>
+                    <p>lorem ipsum</p>
+                </div>
+                <div class="barra"></div>
+                <div class="acoes">
+                    <img src="./assets/editar.svg" alt="">
+                    <img src="./assets/excluir.svg" alt="">
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>
