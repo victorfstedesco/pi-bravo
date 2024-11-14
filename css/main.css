@@ -8,41 +8,66 @@ header{
     padding: 1.5rem;
     margin-bottom: 4rem;
 
-    & nav{
+    & ul{
         display: flex;
         gap: 1.5rem;
 
-        min-width: fit-content;
-    }
+        & li{
 
-    & li{
-        display: flex;
-        list-style: none;
+            list-style: none;
 
-        border: 1px solid #DEDFE1;
-        border-radius: 8px;
-        padding: 0.5rem;
+            border: 1px solid #DEDFE1;
+            border-radius: 8px;
+            padding: 0.5rem;
+
+            cursor: pointer;
+        }
     }
+}
+
+.divisoria{
+    height: 1px;
+    background-color: #DEDFE1;
 }
 
 /* fundo para botões */
 
-.fundo1{
-    padding: 1.5rem 0.75rem 1.5rem 0.75rem;
-    
+
+.button1{
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem ;
+
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+
     background-color: #FEF1F2;
     color: #CD1515;
 }
 
-.fundo2{
-    padding: 1.5rem 0.75rem 1.5rem 0.75rem;
-    
-    color: white;
+.button2{
+    padding: 1.5rem 0.75rem 1.5rem 0.75rem ;
+
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+
     background-color: #CD1515;
+    color: white;
 }
 
 /* fim de fundo para botões */
 
+
+/*titulo da coluna*/
+.titulo-col{
+    font-size: 14px;
+    color: #4A505C;
+}
+
+
+/*fim do titulo da coluna*/
 
 /* barra para organizar div */
 

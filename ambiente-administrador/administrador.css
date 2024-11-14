@@ -1,0 +1,69 @@
+.content-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    margin-bottom: 1rem;
+}
+
+section{
+    width: min-content;
+    margin: 0 auto;
+}
+
+/* card de adminsitrador */
+
+.card{
+    display: flex;
+    align-items: center;
+
+    gap: 1.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid #DEDFE1;
+    width: fit-content;
+
+    & .status{
+        display: flex;
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    & .acoes{
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+/* ajustando a width de cada texto, para deixar as tabelas da mesma medida */
+
+h6{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+#id{
+    width: 2rem;
+}
+
+#nome{
+    width: 15rem;
+    height: 2.75rem;
+}
+
+#e-mail{
+    width: 13.75rem;
+}
+
+#senha{
+    width: 14.5rem;
+}
+
+/**/
+
+
+
+/* fim do card de adminsitrador */
+
