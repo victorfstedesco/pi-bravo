@@ -3,12 +3,19 @@
     justify-content: space-between;
     align-items: center;
     
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #DEDFE1;
 }
 
 section{
     width: min-content;
     margin: 0 auto;
+}
+
+.container-tabela{
+    display: flex;
+    flex-direction: column;
+    
 }
 
 /* card de adminsitrador */

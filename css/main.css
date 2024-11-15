@@ -77,6 +77,11 @@ header{
     background-color: #DEDFE1;
 }
 
+.divisoria{
+    border: 1px solid #DEDFE1;
+    border-bottom: 1px #DEDFE1;
+}
+
 /* fim barra para organizar div */
 
 /* tag ativado/desativado */

@@ -69,7 +69,7 @@ try {
                 </form>
                 <button class="button1">Cadastrar adminsitrador</button>    
             </div>
-            <div class="divisoria"></div>
+            <!--<div class="divisoria"></div>-->
             <div class="container-tabela">
                 <div class="card">
                     <div class="status">
@@ -86,7 +86,7 @@ try {
                     </div>
                     <div id="nome">
                         <p class="titulo-col">Nome</p>
-                        <h6>Emernostrildo da Silva e Lima</h6>
+                        <h6>Emernostrildo da Silva e Limaaaaa</h6>
                     </div>
                     <div id="e-mail">
                         <p class="titulo-col">E-mail</p>
@@ -102,6 +102,7 @@ try {
                         <img src="./assets/excluir.svg" alt="">
                     </div>
                 </div>
+                
             </div>
         </section>
     </main>
