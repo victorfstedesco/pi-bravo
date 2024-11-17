@@ -97,3 +97,15 @@ header{
 
     color: #08875D;
 }
+
+.desativado{
+    display: flex;
+    align-items: center;
+    padding: 0px 4px;
+    gap: 10px;
+
+    border-radius: 4px;
+    background-color: #FEF1F2;
+
+    color: #E02D3C;
+}

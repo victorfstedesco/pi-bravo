@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../php/conexao.php');
+require_once('../public/php/conexao.php');
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -33,10 +33,10 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="./administrador.css"> <!-- css do arquivo -->
+    <link rel="stylesheet" href="../public/css/ambiente-administrador.css"> <!-- css do arquivo -->
 
-    <link rel="stylesheet" href="../css/tipografia.css"> <!-- css externo -->
-    <link rel="stylesheet" href="../css/main.css"> <!-- css externo -->
+    <link rel="stylesheet" href="../public/css/tipografia.css"> <!-- css externo -->
+    <link rel="stylesheet" href="../public/css/main.css"> <!-- css externo -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +55,7 @@ try {
                     <li>Ambiente de produtos</li>
                 </ul>
             </nav>
-            <img src="./assets/logo-minimalista.svg" alt="">
+            <img src="../public/assets/logo-minimalista.svg" alt="">
         </header>
         <!--fim do 'componente' header-->
         <section>
@@ -64,46 +64,49 @@ try {
                 <form method="POST" class="pesquisa-form">
                     <input type="text" placeholder="Buscar administrador" name="adm_nome" required />
                     <button type="submit">
-                        <img src="./assets/lupa.svg" alt="search">
+                        <img src="../public/assets/lupa.svg" alt="search">
                     </button>
                 </form>
                 <button class="button1">Cadastrar adminsitrador</button>    
             </div>
-            <!--<div class="divisoria"></div>-->
             <div class="container-tabela">
+                <?php if ($administradores) { 
+                foreach ($administradores as $administrador) { ?>
                 <div class="card">
                     <div class="status">
                         <p class="titulo-col">Status</p>
                         <div class="ativado">
-                            <img src="../ativado.svg" alt="">
+                            <img src="../public/assets/ativado.svg" alt="">
                             <p>Ativado</p>
                         </div>
                     </div>
                     <div class="barra"></div>
                     <div id="id">
                         <p class="titulo-col">ID</p>
-                        <h6>113</h6>
+                        <h6><?php echo $administrador ['ADM_ID']?></h6>
                     </div>
                     <div id="nome">
                         <p class="titulo-col">Nome</p>
-                        <h6>Emernostrildo da Silva e Limaaaaa</h6>
+                        <h6><?php echo $administrador ['ADM_NOME']?></h6>
                     </div>
                     <div id="e-mail">
                         <p class="titulo-col">E-mail</p>
-                        <h6>name@example.com.br</h6>
+                        <h6><?php echo $administrador ['ADM_EMAIL']?></h6>
                     </div>
                     <div id="senha">
                         <p class="titulo-col">Senha</p>
-                        <h6>$2y$10$TuQRpIDAh2nGGPxMBMAriO5iRmX2pw4G0B4YZKHP88b31eClXCsIG</h6>
+                        <h6><?php echo $administrador ['ADM_SENHA']?></h6>
                     </div>
                     <div class="barra"></div>
                     <div class="acoes">
-                        <img src="./assets/editar.svg" alt="">
-                        <img src="./assets/excluir.svg" alt="">
+                        <img src="../public/assets/editar.svg" alt="">
+                        <img src="../public/assets/excluir.svg" alt="">
                     </div>
                 </div>
-                
             </div>
+            
+            <?php } ?>
+            <?php } ?>
         </section>
     </main>
 </body>
