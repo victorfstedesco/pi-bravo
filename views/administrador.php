@@ -75,11 +75,19 @@ try {
                 <div class="card">
                     <div class="status">
                         <p class="titulo-col">Status</p>
+                        <?php if($administrador ['ADM_ATIVO'] >= 1){ ?>
                         <div class="ativado">
                             <img src="../public/assets/ativado.svg" alt="">
                             <p>Ativado</p>
                         </div>
+                        <?php } else { ?>
+                            <div class="desativado">
+                                <img src="../public/assets/desativado.svg" alt="">
+                                <p>Desativado</p>
+                            </div>
+                        <?php } ?>
                     </div>
+                   
                     <div class="barra"></div>
                     <div id="id">
                         <p class="titulo-col">ID</p>

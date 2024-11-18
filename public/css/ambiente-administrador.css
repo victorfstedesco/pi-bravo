@@ -33,6 +33,7 @@ section{
         display: flex;
         flex-direction: column;
 
+        width: 110px;
         gap: 8px;
     }
 

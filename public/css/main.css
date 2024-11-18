@@ -92,6 +92,7 @@ header{
     padding: 0px 4px;
     gap: 10px;
 
+    width: min-content;
     border-radius: 4px;
     background-color: #EDFDF8;
 
@@ -104,6 +105,7 @@ header{
     padding: 0px 4px;
     gap: 10px;
 
+    width: min-content;
     border-radius: 4px;
     background-color: #FEF1F2;
 
