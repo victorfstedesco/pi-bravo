@@ -30,6 +30,10 @@ header{
     background-color: #DEDFE1;
 }
 
+img{
+    width: min-content;
+}
+
 /* fundo para botões */
 
 

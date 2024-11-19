@@ -9,10 +9,10 @@ if (isset($_GET['id'])) {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        header("Location: ambiente-administrador.php");
+        header("Location: administrador.php");
         exit(); 
     } catch (PDOException $e) {
-        header("Location: ambiente-administrador.php");
+        header("Location: administrador.php");
         exit();
     }
 }
@@ -33,7 +33,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../public/css/ambiente-administrador.css"> <!-- css do arquivo -->
+    <link rel="stylesheet" href="../public/css/administrador.css"> <!-- css do arquivo -->
 
     <link rel="stylesheet" href="../public/css/tipografia.css"> <!-- css externo -->
     <link rel="stylesheet" href="../public/css/main.css"> <!-- css externo -->
