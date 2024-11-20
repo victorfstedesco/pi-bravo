@@ -1,33 +1,52 @@
 <?php
-//Inicia a sessão de gerenciamento do usuário
 session_start();
 
-//Importa a configuração de conexão com o banco de dados
 require_once('../public/php/conexao.php');
 
-//Bloco que será executado quando o formulário for submetido
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    //Pegar os valores do formulário que foram enviados via post
-    $nome=$_POST['nome'];
-    $email=$_POST['email'];
-    $senha=$_POST['senha'];
-    $ativo=isset($_POST['ativo'])?1:0;
+$administrador = null;
 
-    try{
-        $sql="INSERT INTO ADMINISTRADOR (ADM_NOME,ADM_EMAIL,ADM_SENHA,ADM_ATIVO) VALUES (:nome,:email,:senha,:ativo);";
-        $stmt=$pdo->prepare($sql);
-        $stmt->bindParam(':nome',$nome,PDO::PARAM_STR); //Vinculando os placeholders com as variáveis usando a opção que confirma se os dados são uma string
-        $stmt->bindParam(':email',$email,PDO::PARAM_STR);
-        $stmt->bindParam(':senha',$senha,PDO::PARAM_STR);
-        $stmt->bindParam(':ativo',$ativo,PDO::PARAM_STR);
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM ADMINISTRADOR WHERE ADM_ID = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $administrador = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Erro: " . $e->getMessage();
+        }
+        
+        if (!$administrador) {
+            header('Location: ambiente-administrador.php');
+            exit();
+        }
+    } else {
+        header('Location: ambiente-administrador.php');
+        exit();
+    }
+}
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $ativo = isset($_POST['ativo']) ? 1 : 0;
+
+    try {
+        $stmt = $pdo->prepare("UPDATE ADMINISTRADOR SET ADM_NOME = :nome, ADM_EMAIL = :email, ADM_SENHA = :senha, ADM_ATIVO = :ativo WHERE ADM_ID = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);
+        $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
         $stmt->execute();
 
-        //Pegar o ID do Administrador inserido
-        $adm_id=$pdo->lastInsertId();
-        echo "<p style='color:blue'>Administrador Cadastrado com sucesso!! ID: ".$adm_id."</p>";
-    }catch(PDOException $e){
-        echo "<p style='color:red'>Erro ao cadastrar o Administrador".$e->getMessage()."</p>";
+        echo "<p style='color:green;'>Edição feita com sucesso.</p>";
+
+    } catch (PDOException $e) {
+        echo "<p style='color:red;'>Erro ao editar o Administrador: " . $e->getMessage() . "</p>";
     }
 }
 ?>
@@ -40,7 +59,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../public/css/administrador-cadastrar.css"> <!-- css do arquivo -->
+    <link rel="stylesheet" href="../public/css/administrador-editar.css"> <!-- css do arquivo -->
 
     <link rel="stylesheet" href="../public/css/tipografia.css"> <!-- css externo -->
     <link rel="stylesheet" href="../public/css/main.css"> <!-- css externo -->
@@ -91,6 +110,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     </div>
                 </div>
                 <div class="submit">
+                    <button class="button1" type="submit">Excluir</button>
                     <button class="button2" type="submit">Cadastrar Admistrador</button>
                 </div>
             </form>

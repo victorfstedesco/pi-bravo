@@ -67,7 +67,7 @@ try {
                         <img src="../public/assets/lupa.svg" alt="search">
                     </button>
                 </form>
-                <button class="button1">Cadastrar adminsitrador</button>    
+                <a href="./administrador-cadastrar.php"><button class="button1">Cadastrar adminsitrador</button>  </a>  
             </div>
             <div class="container-tabela">
                 <?php if ($administradores) { 
@@ -107,7 +107,7 @@ try {
                     </div>
                     <div class="barra"></div>
                     <div class="acoes">
-                        <img src="../public/assets/editar.svg" alt="">
+                        <a href="./administrador-editar.php?id=<?php echo $administrador['ADM_ID']?>"><img src="../public/assets/editar.svg" alt=""></a>
                         <img src="../public/assets/excluir.svg" alt="">
                     </div>
                 </div>
