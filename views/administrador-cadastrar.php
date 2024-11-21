@@ -6,28 +6,38 @@ session_start();
 require_once('../public/php/conexao.php');
 
 //Bloco que será executado quando o formulário for submetido
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    //Pegar os valores do formulário que foram enviados via post
-    $nome=$_POST['nome'];
-    $email=$_POST['email'];
-    $senha=$_POST['senha'];
-    $ativo=isset($_POST['ativo'])?1:0;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $ativo = isset($_POST['ativo']) ? 1 : 0;
 
-    try{
-        $sql="INSERT INTO ADMINISTRADOR (ADM_NOME,ADM_EMAIL,ADM_SENHA,ADM_ATIVO) VALUES (:nome,:email,:senha,:ativo);";
-        $stmt=$pdo->prepare($sql);
-        $stmt->bindParam(':nome',$nome,PDO::PARAM_STR); //Vinculando os placeholders com as variáveis usando a opção que confirma se os dados são uma string
-        $stmt->bindParam(':email',$email,PDO::PARAM_STR);
-        $stmt->bindParam(':senha',$senha,PDO::PARAM_STR);
-        $stmt->bindParam(':ativo',$ativo,PDO::PARAM_STR);
+    try {
+        $sql = "INSERT INTO ADMINISTRADOR (ADM_NOME, ADM_EMAIL, ADM_SENHA, ADM_ATIVO) VALUES (:nome, :email, :senha, :ativo);";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);
+        $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
 
         $stmt->execute();
 
-        //Pegar o ID do Administrador inserido
-        $adm_id=$pdo->lastInsertId();
-        echo "<p style='color:blue'>Administrador Cadastrado com sucesso!! ID: ".$adm_id."</p>";
-    }catch(PDOException $e){
-        echo "<p style='color:red'>Erro ao cadastrar o Administrador".$e->getMessage()."</p>";
+        // Pegar o ID do Administrador inserido
+        $adm_id = $pdo->lastInsertId();
+
+        // Salvar a mensagem na sessão
+        $_SESSION['mensagem'] = "<p class='mensagem-acerto'>Administrador cadastrado com sucesso! ID: " . $adm_id . "</p>";
+
+        // Redirecionar para evitar reenvio do formulário
+        header("Location: administrador-cadastrar.php");
+        exit;
+    } catch (PDOException $e) {
+        // Salvar a mensagem de erro na sessão
+        $_SESSION['mensagem'] = "<p class='mensangem-erro'>Erro ao cadastrar o administrador: " . $e->getMessage() . "</p>";
+
+        // Redirecionar para evitar reenvio do formulário
+        header("Location: administrador-cadastrar.php");
+        exit;
     }
 }
 ?>
@@ -56,10 +66,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <header>
             <nav>
                 <ul> 
-                    <li>Menu</li>
-                    <li>Ambiente do administrador</li>
-                    <li>Ambiente de categoria</li>
-                    <li>Ambiente de produtos</li>
+                    <a href="./menu.php"><li>Menu</li></a>
+                    <a href="./administrador.php"><li class="li-style">Ambiente do administrador</li></a>
+                    <a href="./categoria.php"><li>Ambiente de categoria</li></a>
+                    <a href="./produtos.php"><li>Ambiente de produtos</li></a>
                 </ul>
             </nav>
             <img src="../public/assets/logo-minimalista.svg" alt="">
@@ -70,6 +80,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <div class="header-content">
             <a href="./administrador.php"><img src="../public/assets/voltar.svg" alt=""></a>
             <h4>Cadastrar administrador</h4>
+            <?php
+                if (isset($_SESSION['mensagem'])) {
+                    echo $_SESSION['mensagem'];
+                    unset($_SESSION['mensagem']);
+            }
+            ?>
         </div>
             <form action="administrador-cadastrar.php" method="post">
                 <div class="formulario">
@@ -94,6 +110,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <button class="button2" type="submit">Cadastrar Admistrador</button>
                 </div>
             </form>
+    </section>
     </section>
 </body>
 </html>

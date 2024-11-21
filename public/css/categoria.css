@@ -58,18 +58,15 @@ h6{
     width: 2rem;
 }
 
-#nome{
-    width: 15rem;
+#categoria{
+    width: 10rem;
     height: 2.75rem;
 }
 
-#e-mail{
-    width: 13.75rem;
+#desc{
+    width: 30rem;
 }
 
-#senha{
-    width: 14.5rem;
-}
 
 /**/
 

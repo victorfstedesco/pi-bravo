@@ -5,24 +5,23 @@ require_once('../public/php/conexao.php');
 
 $administrador = null;
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        try {
-            $stmt = $pdo->prepare("SELECT * FROM ADMINISTRADOR WHERE ADM_ID = :id");
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $administrador = $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
-        }
-        
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM ADMINISTRADOR WHERE ADM_ID = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $administrador = $stmt->fetch(PDO::FETCH_ASSOC);
+
         if (!$administrador) {
-            header('Location: ambiente-administrador.php');
+            $_SESSION['mensagem'] = "<p class='mensagem-erro'>Administrador não encontrado.</p>";
+            header('Location: administrador.php');
             exit();
         }
-    } else {
-        header('Location: ambiente-administrador.php');
+    } catch (PDOException $e) {
+        $_SESSION['mensagem'] = "<p class='mensagem-erro'>Erro ao carregar os dados: " . $e->getMessage() . "</p>";
+        header('Location: administrador.php');
         exit();
     }
 }
@@ -43,10 +42,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
         $stmt->execute();
 
-        echo "<p style='color:green;'>Edição feita com sucesso.</p>";
+        // Salvar mensagem de sucesso na sessão
+        $_SESSION['mensagem'] = "<p class='mensagem-acerto'>Edição feita com sucesso.</p>";
 
+        // Redirecionar para evitar reenvio do formulário
+        header("Location: administrador-editar.php?id=$id");
+        exit;
     } catch (PDOException $e) {
-        echo "<p style='color:red;'>Erro ao editar o Administrador: " . $e->getMessage() . "</p>";
+        // Salvar mensagem de erro na sessão
+        $_SESSION['mensagem'] = "<p class='mensagem-erro'>Erro ao editar o Administrador: " . $e->getMessage() . "</p>";
+
+        // Redirecionar para evitar reenvio do formulário
+        header("Location: administrador-editar.php?id=$id");
+        exit;
     }
 }
 ?>
@@ -75,10 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <header>
             <nav>
                 <ul> 
-                    <li>Menu</li>
-                    <li>Ambiente do administrador</li>
-                    <li>Ambiente de categoria</li>
-                    <li>Ambiente de produtos</li>
+                    <a href="./menu.php"><li>Menu</li></a>
+                    <a href="./administrador.php"><li class="li-style">Ambiente do administrador</li></a>
+                    <a href="./categoria.php"><li>Ambiente de categoria</li></a>
+                    <a href="./produtos.php"><li>Ambiente de produtos</li></a>
                 </ul>
             </nav>
             <img src="../public/assets/logo-minimalista.svg" alt="">
@@ -88,30 +96,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <section>
         <div class="header-content">
             <a href="./administrador.php"><img src="../public/assets/voltar.svg" alt=""></a>
-            <h4>Cadastrar administrador</h4>
+            <h4>Editar administrador</h4>
+            <?php
+                if (isset($_SESSION['mensagem'])) {
+                    echo $_SESSION['mensagem'];
+                    unset($_SESSION['mensagem']);
+            }
+            ?>
         </div>
-            <form action="administrador-cadastrar.php" method="post">
+            <form action="administrador-editar.php" method="post">
                 <div class="formulario">
                     <div class="div-input">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($administrador['ADM_ID'] ?? ''); ?>">
                         <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome">
+                        <input type="text" id="nome" name="nome" placeholder="Nome" value="<?php echo htmlspecialchars($administrador['ADM_NOME'] ?? ''); ?>">
                     </div>
                     <div class="div-input">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" placeholder="E-mail">
+                        <input type="text" id="email" name="email" placeholder="E-mail" value="<?php echo htmlspecialchars($administrador['ADM_EMAIL'] ?? ''); ?>">
                     </div>
                     <div class="div-input">
                         <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="Senha">
+                        <input type="password" id="senha" name="senha" placeholder="Senha" value="<?php echo htmlspecialchars($administrador['ADM_SENHA'] ?? ''); ?>">
                     </div>
                     <div class="div-checkbox">
                         <label for="ativo">Ativo</label>
-                        <input type="checkbox" id="ativo" name="ativo" value="1" checked>
+                        <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo (isset($administrador['ADM_ATIVO']) && $administrador['ADM_ATIVO'] == 1) ? 'checked' : ''; ?>>
                     </div>
                 </div>
                 <div class="submit">
                     <button class="button1" type="submit">Excluir</button>
-                    <button class="button2" type="submit">Cadastrar Admistrador</button>
+                    <button class="button2" type="submit">Editar Administrador</button>
                 </div>
             </form>
     </section>

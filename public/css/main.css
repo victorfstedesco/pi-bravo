@@ -15,15 +15,24 @@ header{
         gap: 1.5rem;
 
         & li{
-
             list-style: none;
-
-            border: 1px solid #DEDFE1;
-            border-radius: 8px;
             padding: 0.5rem;
+
+            color: #6C707A;
 
             cursor: pointer;
         }
+    }
+
+    .li-style{
+        list-style: none;
+
+        background-color: #FEF1F2;
+        color: #CD1515;
+        border-radius: 8px;
+        padding: 0.5rem;
+
+        cursor: pointer;
     }
 }
 
@@ -48,6 +57,8 @@ img{
 }
 
 /* alheios */
+
+
 
 /* fundo para botões */
 
@@ -153,4 +164,34 @@ input{
     width: 424px;
 }
 
+.pesquisa-form{
+    display: flex;
+    align-items: center;
+    
+    gap: 1rem;
+}
+
 /* input/form */
+
+/* mensagem de acerto/erro */
+
+.mensagem-erro{
+    padding: 0.5rem;
+    font-weight: 500;
+
+    background-color: #FEF1F2;
+    color: #CD1515;
+}
+
+.mensagem-acerto{
+    padding: 0.5rem;
+    font-weight: 500;
+
+    background-color: #EDFDF8;
+    color: #08875D;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+/* mensagem de acerto/erro */ 
+
