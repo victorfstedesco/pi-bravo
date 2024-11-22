@@ -67,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome']);
     $descricao = trim($_POST['descricao']);
     $preco = floatval($_POST['preco']);
+    $desconto = floatval($_POST['desconto']); // Novo campo
     $imagem_url = trim($_POST['imagem_url']);
     $estoque = intval($_POST['estoque']);
     $categoria_id = intval($_POST['categoria_id']);
@@ -76,13 +77,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Atualizar tabela PRODUTO
         $stmt = $pdo->prepare("
             UPDATE PRODUTO
-            SET PRODUTO_NOME = :nome, PRODUTO_DESC = :descricao, PRODUTO_PRECO = :preco, PRODUTO_ATIVO = :ativo
+            SET PRODUTO_NOME = :nome, PRODUTO_DESC = :descricao, PRODUTO_PRECO = :preco, PRODUTO_DESCONTO = :desconto, CATEGORIA_ID = :categoria_id,  PRODUTO_ATIVO = :ativo
             WHERE PRODUTO_ID = :id
         ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
         $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
         $stmt->bindParam(':preco', $preco, PDO::PARAM_STR);
+        $stmt->bindParam(':desconto', $desconto, PDO::PARAM_STR);
+        $stmt->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
         $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
         $stmt->execute();
 
