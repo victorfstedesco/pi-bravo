@@ -5,6 +5,11 @@ session_start();
 //Importa a configuração de conexão com o banco de dados
 require_once('../public/php/conexao.php');
 
+if(!isset($_SESSION['admin_logado'])){
+    header ("Location:login.php");
+    exit();
+}
+
 //Bloco que será executado quando o formulário for submetido
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['nome'];

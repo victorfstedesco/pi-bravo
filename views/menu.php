@@ -56,7 +56,7 @@ $usuario = $_SESSION['admin_logado']['ADM_NOME'];  // Obtém o nome do administr
                     <p>Gerenciamento geral de todos os produtos do banco de dados</p>
                 </div>
             </div>
-            <p class="descricao">Esse aplicativo tem como o intuito acadêmico. Qualquer dúvida entre em contato com os desenvolvedores.</p>
+            <p class="descricao">Esse aplicativo tem como o intuito acadêmico. Qualquer dúvida entre em contato com os desenvolvedores. Clique aqui <a href="https://www.figma.com/design/R4eTpYzFdn0nOT1yelLDk7/PI---BRAVO?node-id=0-1&t=9WdFYzIDd5RykAte-1"><strong>'figma'</strong></a> para uma visualização geral do design</p>
         </section>
     </main>
 </body>

@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once('../public/php/conexao.php');
+
+if(!isset($_SESSION['admin_logado'])){
+    header ("Location:login.php");
+    exit();
+}
+
 try{
     $stmt=$pdo->prepare("SELECT PRODUTO.*,CATEGORIA.CATEGORIA_NOME,PRODUTO_IMAGEM.IMAGEM_URL,PRODUTO_ESTOQUE.PRODUTO_QTD
     FROM PRODUTO JOIN CATEGORIA ON PRODUTO.CATEGORIA_ID=CATEGORIA.CATEGORIA_ID
@@ -129,6 +135,7 @@ try{
         function confirmDelete(id) {
             if (confirm("Você tem certeza que deseja excluir este produto?")) {
                 window.location.href = "produtos.php?id=" + id;
+                console.log(o)
             }
         }
 

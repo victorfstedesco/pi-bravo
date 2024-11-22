@@ -3,6 +3,11 @@ session_start();
 
 require_once('../public/php/conexao.php');
 
+if(!isset($_SESSION['admin_logado'])){
+    header ("Location:login.php");
+    exit();
+}
+
 try {
     // Consulta para buscar categorias
     $stmt_categoria = $pdo->prepare("SELECT * FROM CATEGORIA");
@@ -111,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../public/css/produtos-cadastrar.css"> <!-- css do arquivo -->
+    <link rel="stylesheet" href="../public/css/produtos-editar.css"> <!-- css do arquivo -->
 
     <link rel="stylesheet" href="../public/css/tipografia.css"> <!-- css externo -->
     <link rel="stylesheet" href="../public/css/main.css"> <!-- css externo -->
@@ -186,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo (isset($produto['PRODUTO_ATIVO']) && $produto['PRODUTO_ATIVO'] == 1) ? 'checked' : ''; ?>>
                     </div>
                     
-                    <div id="containerImagens">
+                    <div id="div-input containerImagens">
                         <label for="imagem_url">URL da Imagem</label>
                         <input type="text" name="imagem_url" id="imagem_url" value="<?php echo isset($produto['IMAGEM_URL']) ? $produto['IMAGEM_URL'] : ''; ?>">
                     </div>

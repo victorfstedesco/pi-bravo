@@ -2,6 +2,12 @@
 session_start();
 require_once('../public/php/conexao.php');
 
+if(!isset($_SESSION['admin_logado'])){
+    header ("Location:login.php");
+    exit();
+}
+
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     try {

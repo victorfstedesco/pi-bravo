@@ -3,6 +3,11 @@ session_start();
 
 require_once("../public/php/conexao.php");
 
+if(!isset($_SESSION['admin_logado'])){
+    header ("Location:login.php");
+    exit();
+}
+
 //bloco de consulta para categoria 
 try{
     $stmt_categoria = $pdo->prepare("SELECT * FROM CATEGORIA");

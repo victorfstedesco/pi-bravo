@@ -2,6 +2,11 @@
 session_start();
 require_once('../public/php/conexao.php');
 
+if(!isset($_SESSION['admin_logado'])){
+    header ("Location:login.php");
+    exit();
+}
+
 try {
     $stmt_categoria = $pdo->prepare("SELECT * FROM CATEGORIA");
     $stmt_categoria->execute();
@@ -121,7 +126,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="div-input">
                         <label for="descricao">Descrição</label>
-                        <textarea name="descricao" id="descricao"><?php echo isset($categoria['CATEGORIA_DESC']) ? $categoria['CATEGORIA_DESC'] : ''; ?></textarea>                </div>
+                        <textarea name="descricao" id="descricao"><?php echo isset($categoria['CATEGORIA_DESC']) ? $categoria['CATEGORIA_DESC'] : ''; ?></textarea>                
+                    </div>
+                    <div class="div-checkbox">
+                        <label for="ativo">Ativo</label>
+                        <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo (isset($categoria['CATEGORIA_ATIVO']) && $categoria['CATEGORIA_ATIVO'] == 1) ? 'checked' : ''; ?>>
+                    </div>
                 <div class="submit">
                     <button class="button2" type="submit">Editar categoria</button>
                 </div>
