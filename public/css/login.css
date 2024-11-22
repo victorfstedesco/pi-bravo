@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::placeholder{
+    font-size: 14px;
+}
+
+body {
+    font-family: Poppins, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1920px;
+    height: 80vh;
+    max-height: 800px;
+    background-color: white;
+
+    border-top: 1px solid #EBEBEB;
+    border-bottom: 1px solid #EBEBEB;
+    overflow: hidden;
+}
+
+.form-section {
+    width: 960px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 70px;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+
+h2 {
+    font-size: 24px !important;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    & button{
+        width: 424px;
+    } 
+}
+
+.image-section {
+    width: 960px;
+    border-right: 1px solid #EBEBEB;
+    background-image: url(../assets/foto-login.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.image-section img {
+    width: 100%;
+    object-fit: cover;
+    
+}
+
+#resultado {
+    display: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: #EBEBEB 2px solid;
+    width: 300px;
+    text-align: center;
+    margin-top: 10px;
+}

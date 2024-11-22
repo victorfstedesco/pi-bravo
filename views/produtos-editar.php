@@ -3,74 +3,106 @@ session_start();
 
 require_once('../public/php/conexao.php');
 
-try{
+try {
+    // Consulta para buscar categorias
     $stmt_categoria = $pdo->prepare("SELECT * FROM CATEGORIA");
-    $stmt_categoria-> execute();
+    $stmt_categoria->execute();
     $categorias = $stmt_categoria->fetchAll(PDO::FETCH_ASSOC);
-}catch(PDOException $e){
-    echo "<p style='color:red;'>Erro ao buscar categorias: . $e->getMessage(). </p>";
+} catch (PDOException $e) {
+    $_SESSION['mensagem'] = "<p style='color:red;'>Erro ao buscar categorias: " . htmlspecialchars($e->getMessage()) . "</p>";
+    header('Location: produtos.php');
+    exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
-    $id = $_GET['id'];
+// Inicialização da variável $produto para evitar erros no formulário
+$produto = [
+    'PRODUTO_NOME' => '',
+    'PRODUTO_DESC' => '',
+    'PRODUTO_DESCONTO' => '',
+    'PRODUTO_QTD' => '',
+    'PRODUTO_PRECO' => '',
+    'IMAGEM_URL' => '',
+    'PRODUTO_ATIVO' => 0,
+];
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $id = intval($_GET['id']);
         try {
-            $stmt = $pdo->prepare("SELECT * FROM PRODUTO
+            $stmt = $pdo->prepare("
+                SELECT * FROM PRODUTO
                 LEFT JOIN PRODUTO_IMAGEM ON PRODUTO.PRODUTO_ID = PRODUTO_IMAGEM.PRODUTO_ID
                 LEFT JOIN PRODUTO_ESTOQUE ON PRODUTO.PRODUTO_ID = PRODUTO_ESTOQUE.PRODUTO_ID
-                WHERE PRODUTO.PRODUTO_ID = :id");
+                WHERE PRODUTO.PRODUTO_ID = :id
+            ");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             $produto = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $categorias = $pdo->query("SELECT CATEGORIA_ID, CATEGORIA_NOME FROM CATEGORIA")->fetchAll(PDO::FETCH_ASSOC);
+            // Validar se o produto foi encontrado
+            if (!$produto) {
+                $_SESSION['mensagem'] = "<p style='color:red;'>Produto não encontrado.</p>";
+                header('Location: produtos.php');
+                exit();
+            }
         } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
+            $_SESSION['mensagem'] = "<p style='color:red;'>Erro ao buscar produto: " . htmlspecialchars($e->getMessage()) . "</p>";
+            header('Location: produtos.php');
+            exit();
         }
     } else {
-        header("Location: produtos-editar.php?id=$id");
+        $_SESSION['mensagem'] = "<p style='color:red;'>ID do produto inválido ou não fornecido.</p>";
+        header('Location: produtos.php');
         exit();
     }
+}
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
-    $nome = $_POST['nome'];
-    $descricao = $_POST['descricao'];
-    $preco = $_POST['preco'];
-    $imagem_url = $_POST['imagem_url'];
-    $estoque = $_POST['estoque'];
-    $categoria_id = $_POST['categoria_id'];
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = intval($_REQUEST['id']);
+    $nome = trim($_POST['nome']);
+    $descricao = trim($_POST['descricao']);
+    $preco = floatval($_POST['preco']);
+    $imagem_url = trim($_POST['imagem_url']);
+    $estoque = intval($_POST['estoque']);
+    $categoria_id = intval($_POST['categoria_id']);
+    $ativo = isset($_POST['ativo']) ? 1 : 0;
 
     try {
-        // Atualizando a tabela PRODUTO
-        $stmt = $pdo->prepare("UPDATE PRODUTO SET PRODUTO_NOME = :nome, PRODUTO_DESC = :descricao, PRODUTO_PRECO = :preco WHERE PRODUTO_ID = :id");
+        // Atualizar tabela PRODUTO
+        $stmt = $pdo->prepare("
+            UPDATE PRODUTO
+            SET PRODUTO_NOME = :nome, PRODUTO_DESC = :descricao, PRODUTO_PRECO = :preco, PRODUTO_ATIVO = :ativo
+            WHERE PRODUTO_ID = :id
+        ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
         $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
         $stmt->bindParam(':preco', $preco, PDO::PARAM_STR);
+        $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
         $stmt->execute();
 
-        // Atualizando a tabela PRODUTO_IMAGEM
+        // Atualizar tabela PRODUTO_IMAGEM
         $stmt = $pdo->prepare("UPDATE PRODUTO_IMAGEM SET IMAGEM_URL = :imagem_url WHERE PRODUTO_ID = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':imagem_url', $imagem_url, PDO::PARAM_STR);
         $stmt->execute();
 
-        // Atualizando a tabela PRODUTO_ESTOQUE
+        // Atualizar tabela PRODUTO_ESTOQUE
         $stmt = $pdo->prepare("UPDATE PRODUTO_ESTOQUE SET PRODUTO_QTD = :estoque WHERE PRODUTO_ID = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':estoque', $estoque, PDO::PARAM_INT);
         $stmt->execute();
-
+        
+        $_SESSION['mensagem'] = "<p class='mensagem-acerto'>Produto atualizado com sucesso!</p>";
         header("Location: produtos-editar.php?id=$id");
         exit();
     } catch (PDOException $e) {
-        echo "Erro: " . $e->getMessage();
+        $_SESSION['mensagem'] = "<p class='mensagem-erro'>Erro ao atualizar produto: " . htmlspecialchars($e->getMessage()) . "</p>";
+        header("Location: produtos-editar.php?id=$id");
+        exit();
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
         </div>
-            <form action="produtos-editar.php" method="POST">
+            <form method="POST">
                 <div class="formulario">
                     <div class="div-input">
                         <label for="nome">Nome</label>
@@ -140,10 +172,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="div-input">
                         <label for="categoria">Categoria</label>
-                        <select name="categoria_id" id="categoria_id" required> <!-- COMEÇO DA MODIFICAÇÃO -->
-                        <?php foreach ($categorias as $categoria) { ?>
-                        <option value="<?php echo $categoria['CATEGORIA_ID']; ?>"> <?php echo $categoria['CATEGORIA_NOME']; ?> </option>
-                        <?php } ?>
+                        <select name="categoria_id" id="categoria_id" required>
+                            <?php foreach ($categorias as $categoria) { ?>
+                                <option value="<?php echo $categoria['CATEGORIA_ID']; ?>" 
+                                    <?php echo (isset($produto['CATEGORIA_ID']) && $produto['CATEGORIA_ID'] == $categoria['CATEGORIA_ID']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($categoria['CATEGORIA_NOME']); ?>
+                                </option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="div-checkbox">

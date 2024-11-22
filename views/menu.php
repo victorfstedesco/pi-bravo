@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['admin_logado'])) {
+    header('Location: login.php');  // Redireciona para login se não estiver logado
+    exit();
+}
+
+$usuario = $_SESSION['admin_logado']['ADM_NOME'];  // Obtém o nome do administrador da sessão
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,12 +31,12 @@
         <section>
             <img src="../public/assets/logo completo 1.svg" alt="" class="logo">
             <div class="bem-vindo">
-                <h5>Bem vindo 'nome'</h5>
+                <h5>Bem vindo '<?php echo $usuario?>'</h5>
                 <div class="finalizar-sessao">
                     <a href="./login.php">
                         <p>Finalizar sessão</p>
                     </a>
-                    <img src="./assets/sair.svg" alt="">
+                    <img src="../public/assets/sair.svg" alt="">
                 </div>
             </div>
             <div class="direcionamentos">
