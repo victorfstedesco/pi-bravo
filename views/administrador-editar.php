@@ -109,15 +109,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="div-input">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($administrador['ADM_ID'] ?? ''); ?>">
                         <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome" value="<?php echo htmlspecialchars($administrador['ADM_NOME'] ?? ''); ?>">
+                        <input type="text" id="nome" name="nome" placeholder="Nome" value="<?php echo htmlspecialchars($administrador['ADM_NOME'] ?? ''); ?>" required>
                     </div>
                     <div class="div-input">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" placeholder="E-mail" value="<?php echo htmlspecialchars($administrador['ADM_EMAIL'] ?? ''); ?>">
+                        <input type="text" id="email" name="email" placeholder="E-mail" value="<?php echo htmlspecialchars($administrador['ADM_EMAIL'] ?? ''); ?>" required>
                     </div>
                     <div class="div-input">
                         <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="Senha" value="<?php echo htmlspecialchars($administrador['ADM_SENHA'] ?? ''); ?>">
+                        <input type="password" id="senha" name="senha" placeholder="Senha" value="<?php echo htmlspecialchars($administrador['ADM_SENHA'] ?? ''); ?>" required>
                     </div>
                     <div class="div-checkbox">
                         <label for="ativo">Ativo</label>

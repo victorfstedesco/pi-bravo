@@ -96,15 +96,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="formulario">
                     <div class="div-input">
                         <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome">
+                        <input type="text" id="nome" name="nome" placeholder="Nome" required>
                     </div>
                     <div class="div-input">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" placeholder="E-mail">
+                        <input type="text" id="email" name="email" placeholder="E-mail" required>
                     </div>
                     <div class="div-input">
                         <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="Senha">
+                        <input type="password" id="senha" name="senha" placeholder="Senha" required>
                     </div>
                     <div class="div-checkbox">
                         <label for="ativo">Ativo</label>

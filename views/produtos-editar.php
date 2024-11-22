@@ -157,23 +157,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="formulario">
                     <div class="div-input">
                         <label for="nome">Nome</label>
-                        <input type="text" name="nome" id="nome" value="<?php echo $produto['PRODUTO_NOME']; ?>">
+                        <input type="text" name="nome" id="nome" value="<?php echo $produto['PRODUTO_NOME']; ?>" required>
                         </div>
                     <div class="div-input">
                         <label for="descricao">Descrição</label>
-                        <textarea name="descricao" id="descricao"><?php echo $produto['PRODUTO_DESC']; ?></textarea>
+                        <textarea name="descricao" id="descricao" required><?php echo $produto['PRODUTO_DESC']; ?></textarea>
                     </div>
                     <div class="div-input">
                         <label for="desconto">Desconto</label>
-                        <input type="text" name="desconto" id="desconto" value="<?php echo $produto['PRODUTO_DESCONTO']; ?>">
+                        <input type="text" name="desconto" id="desconto" value="<?php echo $produto['PRODUTO_DESCONTO']; ?>" required>
                     </div>
                     <div class="div-input">
                         <label for="estoque">Estoque</label>
-                        <input type="number" name="estoque" id="estoque" value="<?php echo $produto['PRODUTO_QTD']; ?>">
+                        <input type="number" name="estoque" id="estoque" value="<?php echo $produto['PRODUTO_QTD']; ?>" required>
                     </div>
                     <div class="div-input">
                         <label for="preco">Preço</label>
-                        <input type="number" name="preco" id="preco" value="<?php echo $produto['PRODUTO_PRECO']; ?>">
+                        <input type="number" name="preco" id="preco" value="<?php echo $produto['PRODUTO_PRECO']; ?>" required>
                     </div>
                     <div class="div-input">
                         <label for="categoria">Categoria</label>

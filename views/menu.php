@@ -31,7 +31,7 @@ $usuario = $_SESSION['admin_logado']['ADM_NOME'];  // Obtém o nome do administr
         <section>
             <img src="../public/assets/logo completo 1.svg" alt="" class="logo">
             <div class="bem-vindo">
-                <h5>Bem vindo '<?php echo $usuario?>'</h5>
+                <h5>Bem vindo <strong>'<?php echo $usuario?>'</strong></h5>
                 <div class="finalizar-sessao">
                     <a href="./login.php">
                         <p>Finalizar sessão</p>
