@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="submit">
                     <button class="button1" type="submit">Excluir</button>
-                    <button class="button2" type="submit">Editar Administrador</button>
+                    <button class="button2" type="submit">Editar administrador</button>
                 </div>
             </form>
     </section>

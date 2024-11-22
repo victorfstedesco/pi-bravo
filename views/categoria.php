@@ -1,6 +1,23 @@
 <?php
 session_start();
 require_once('../public/php/conexao.php');
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    try {
+        $stmt = $pdo->prepare("DELETE FROM CATEGORIA WHERE CATEGORIA_ID = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        header("Location: categoria.php");
+        exit(); 
+    } catch (PDOException $e) {
+        header("Location: categoria.php");
+        exit();
+    }
+}
+
+
 try{
     $stmt=$pdo->prepare("SELECT * FROM CATEGORIA");
     $stmt->execute();//Executa a consulta
@@ -41,7 +58,7 @@ try{
                     <a href="./menu.php"><li>Menu</li></a>
                     <a href="./administrador.php"><li>Ambiente do administrador</li></a>
                     <a href="./categoria.php"><li class="li-style">Ambiente de categoria</li></a>
-                    <a href="./produtos.php"><li>Ambiente de produtos</li></a>
+                    <a href="./produtos.php"><li >Ambiente de produtos</li></a>
                 </ul>
             </nav>
             <img src="../public/assets/logo-minimalista.svg" alt="">
@@ -105,8 +122,8 @@ try{
 
     <script>
         function confirmDelete(id) {
-            if (confirm("Você tem certeza que deseja excluir este administrador?")) {
-                window.location.href = "administrador.php?id=" + id;
+            if (confirm("Você tem certeza que deseja excluir esta categoria?")) {
+                window.location.href = "categoria.php?id=" + id;
             }
         }
     </script>

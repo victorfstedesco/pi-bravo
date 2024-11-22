@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./menu.css"> <!-- css do arquivo -->
+    <link rel="stylesheet" href="../public/css/menu.css"> <!-- css do arquivo -->
 
-    <link rel="stylesheet" href="../css/tipografia.css"> <!-- css externo -->
-    <link rel="stylesheet" href="../css/main.css"> <!-- css externo -->
+    <link rel="stylesheet" href="../public/css/tipografia.css"> <!-- css externo -->
+    <link rel="stylesheet" href="../public/css/main.css"> <!-- css externo -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,27 +17,29 @@
 <body>
     <main>
         <section>
-            <img src="./assets/logo completo 1.svg" alt="" class="logo">
+            <img src="../public/assets/logo completo 1.svg" alt="" class="logo">
             <div class="bem-vindo">
                 <h5>Bem vindo 'nome'</h5>
                 <div class="finalizar-sessao">
-                    <p>Finalizar sessão</p>
+                    <a href="./login.php">
+                        <p>Finalizar sessão</p>
+                    </a>
                     <img src="./assets/sair.svg" alt="">
                 </div>
             </div>
             <div class="direcionamentos">
-                <div class="card">
-                    <img src="./assets/administrador.svg" alt="">
+                <div onclick="window.location.href='administrador.php'" class="card">
+                    <img src="../public/assets/administrador.svg" alt="">
                     <h3>Ambiente do Administrador</h3>
-                    <p>Configuração geral de todos os administradores.</p>
+                    <p>Configuração geral de todos os administradores.</p> 
                 </div>
-                <div class="card">
-                    <img src="./assets/categoria.svg" alt="">
+                <div onclick="window.location.href='categoria.php'" class="card">
+                    <img src="../public/assets/categoria.svg" alt="">
                     <h3>Ambiente de categoria</h3>
                     <p>Cadastrar uma categoria para adicionar ao produto</p>
                 </div>
-                <div class="card">
-                    <img src="./assets/produtos.svg" alt="">
+                <div onclick="window.location.href='produtos.php'" class="card">
+                    <img src="../public/assets/produtos.svg" alt="">
                     <h3>Ambiente de produtos</h3>
                     <p>Gerenciamento geral de todos os produtos do banco de dados</p>
                 </div>

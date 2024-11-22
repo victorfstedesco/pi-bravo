@@ -171,6 +171,17 @@ input{
     gap: 1rem;
 }
 
+textarea{
+    resize: none;
+    height: 400px;
+    padding: 1rem;
+    border: 1px solid #DEDFE1;
+}
+
+select{
+    width: min-content;
+}
+
 /* input/form */
 
 /* mensagem de acerto/erro */
@@ -181,6 +192,8 @@ input{
 
     background-color: #FEF1F2;
     color: #CD1515;
+    border-radius: 8px;
+    width: fit-content;
 }
 
 .mensagem-acerto{

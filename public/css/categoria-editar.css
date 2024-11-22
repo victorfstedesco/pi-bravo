@@ -1,0 +1,38 @@
+/* */
+section{
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0 auto;
+    gap: 3rem;
+    width: min-content;
+
+    margin-bottom: 4rem;
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+
+    gap: 3rem;
+
+    & .formulario{
+        display: flex;
+        flex-direction: column;
+
+        gap: 1.5rem;
+    }
+}
+
+.submit{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+
+/* */

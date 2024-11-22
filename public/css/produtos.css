@@ -1,0 +1,114 @@
+.content-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #DEDFE1;
+}
+
+section{
+    width: min-content;
+    margin: 0 auto;
+
+    margin-bottom: 4rem;
+}
+
+.container-tabela{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+/* card de adminsitrador */
+
+.card-header{
+    display: flex;
+    align-items: center;
+
+    gap: 1.5rem;
+    padding: 1rem;
+    width: fit-content;
+
+    & .status{
+        display: flex;
+        flex-direction: column;
+
+        width: 110px;
+        gap: 8px;
+    }
+
+    & .acoes{
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+.card-info{
+    display: flex;
+    gap: 1.5rem;
+
+    border-bottom: 1px solid #DEDFE1;
+    padding: 1rem;
+
+    & img{
+        width: 166px;
+        height: 166px;
+    }
+
+    & .desc{
+        display: flex;
+        flex-direction: column;
+
+        gap: 0.5rem;
+    }
+}
+
+/* ajustando a width de cada texto, para deixar as tabelas da mesma medida */
+
+h6, desc{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+
+#id{
+    width: 2rem;
+}
+
+#nome{
+    width: 160px;
+    height: 2.75rem;
+}
+
+#categoria{
+    width: 160px;
+}
+
+#quantidade{
+    width: 160px;
+}
+
+#preco{
+    width: 160px;
+}
+
+#desconto{
+    width: 80px;
+}
+
+.desc h6{
+    width: 100%;
+    height: 100px;
+    text-wrap: wrap;
+}
+
+/**/
+
+
+
+/* fim do card de adminsitrador */
+
