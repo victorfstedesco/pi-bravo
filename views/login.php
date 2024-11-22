@@ -1,13 +1,7 @@
 <?php 
 session_start();
 
-if(isset($_SESSION['mensagem_erro'])){
-    echo "<p class='error-message'>" .$_SESSION['mensagem_erro']."</p>";
-    unset($_SESSION['mensagem_erro']);
-}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -16,8 +10,7 @@ if(isset($_SESSION['mensagem_erro'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" href="../public/css/login.css">
-
+    <link rel="stylesheet" href="../public/css/login.css"> <!-- Adapte esse CSS para seu layout -->
     <link rel="stylesheet" href="../public/css/tipografia.css">
     <link rel="stylesheet" href="../public/css/main.css">
 
@@ -45,9 +38,20 @@ if(isset($_SESSION['mensagem_erro'])){
                     <label for="senha">Senha</label>
                     <input type="password" id="senha" name="senha" required>
                 </div>
+                <?php 
+                    if (isset($_SESSION['mensagem_erro'])) {
+                        echo "<div class='error-message-container'>";
+                        echo "<p class='mensagem-erro'>" . $_SESSION['mensagem_erro'] . "</p>";
+                        echo "</div>";
+                        unset($_SESSION['mensagem_erro']); // Limpa a mensagem após exibição
+                    }
+                ?>
                 
                 <button class="button2" type="submit">Entrar</button>
             </form>
-            </div>
         </div>
+
+        <!-- Exibe a mensagem de erro aqui, logo abaixo do formulário -->
     </div>
+</body>
+</html>
