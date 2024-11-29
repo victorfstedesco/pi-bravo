@@ -97,11 +97,11 @@ try{
                 <div class="formulario">
                     <div class="div-input">
                         <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome">
+                        <input type="text" id="nome" name="nome" placeholder="Nome" required>
                     </div>
                     <div class="div-input">
                         <label for="descricao">Descrição</label>
-                        <textarea name="descricao" id="descricao" required></textarea>
+                        <textarea name="descricao" id="descricao" required></textarea >
                     </div>
                     <div class="div-checkbox">
                         <label for="ativo">Ativo</label>

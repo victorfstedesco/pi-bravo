@@ -67,13 +67,13 @@ try {
         <section>
             <div class="content-header">
                 <h4>Ambiente do administrador</h4>
-                <form method="POST" class="pesquisa-form">
+                <!-- <form method="POST" class="pesquisa-form">
                     <input type="text" placeholder="Buscar administrador" name="adm_nome" required />
                     <button type="submit">
                         <img src="../public/assets/lupa.svg" alt="search">
                     </button>
-                </form>
-                <a href="./administrador-cadastrar.php"><button class="button1">Cadastrar adminsitrador</button>  </a>  
+                </form> -->
+                <a href="./administrador-cadastrar.php"><button class="button1">Cadastrar administrador</button>  </a>  
             </div>
             <div class="container-tabela">
                 <?php if ($administradores) { 

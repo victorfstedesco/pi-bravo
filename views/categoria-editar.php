@@ -120,17 +120,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form action="categoria-editar.php" method="post">
                 <div class="formulario">
                     <div class="div-input">
-                        <input type="hidden" name="id" value="<?php echo isset($categoria['CATEGORIA_ID']) ? $categoria['CATEGORIA_ID'] : ''; ?>">
+                        <input type="hidden" name="id" required value="<?php echo isset($categoria['CATEGORIA_ID']) ? $categoria['CATEGORIA_ID'] : ''; ?>">
                         <label for="categoria">Categoria</label>
-                        <input type="text" name="nome" id="nome" value="<?php echo isset($categoria['CATEGORIA_NOME']) ? $categoria['CATEGORIA_NOME'] : ''; ?>">
+                        <input type="text" name="nome" required id="nome" value="<?php echo isset($categoria['CATEGORIA_NOME']) ? $categoria['CATEGORIA_NOME'] : ''; ?>">
                     </div>
                     <div class="div-input">
                         <label for="descricao">Descrição</label>
-                        <textarea name="descricao" id="descricao"><?php echo isset($categoria['CATEGORIA_DESC']) ? $categoria['CATEGORIA_DESC'] : ''; ?></textarea>                
+                        <textarea name="descricao" required id="descricao"><?php echo isset($categoria['CATEGORIA_DESC']) ? $categoria['CATEGORIA_DESC'] : ''; ?></textarea>                
                     </div>
                     <div class="div-checkbox">
                         <label for="ativo">Ativo</label>
-                        <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo (isset($categoria['CATEGORIA_ATIVO']) && $categoria['CATEGORIA_ATIVO'] == 1) ? 'checked' : ''; ?>>
+                        <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo (isset($categoria['CATEGORIA_ATIVO']) && $categoria['CATEGORIA_ATIVO'] == 1) ? 'checked' : ''; ?> required>
                     </div>
                 <div class="submit">
                     <button class="button2" type="submit">Editar categoria</button>

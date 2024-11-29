@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="div-input">
                         <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="Senha" value="<?php echo htmlspecialchars($administrador['ADM_SENHA'] ?? ''); ?>" required>
+                        <input type="text" id="senha" name="senha" placeholder="Senha" value="<?php echo htmlspecialchars($administrador['ADM_SENHA'] ?? ''); ?>" required>
                     </div>
                     <div class="div-checkbox">
                         <label for="ativo">Ativo</label>

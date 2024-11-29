@@ -58,12 +58,12 @@ try{
         <section>
             <div class="content-header">
                 <h4>Ambiente de produtos</h4>
-                <form method="POST" class="pesquisa-form">
+                <!-- <form method="POST" class="pesquisa-form">
                     <input type="text" placeholder="Buscar administrador" name="adm_nome" required />
                     <button type="submit">
                         <img src="../public/assets/lupa.svg" alt="search">
                     </button>
-                </form>
+                </form> -->
                 <a href="./produtos-cadastrar.php"><button class="button1">Cadastrar produto</button>  </a>  
             </div>
             <div class="container-tabela">

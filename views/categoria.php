@@ -67,12 +67,12 @@ try{
         <section>
             <div class="content-header">
                 <h4>Ambiente de categoria</h4>
-                <form method="POST" class="pesquisa-form">
+                <!-- <form method="POST" class="pesquisa-form">
                     <input type="text" placeholder="Buscar categoria" name="adm_nome" required />
                     <button type="submit">
                         <img src="../public/assets/lupa.svg" alt="search">
                     </button>
-                </form>
+                </form> -->
                 <a href="./categoria-cadastrar.php"><button class="button1">Cadastrar categoria</button>  </a>  
             </div>
             <div class="container-tabela">
