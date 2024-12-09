@@ -189,7 +189,7 @@ try{
                 </div>
                 <div class="submit">
                     <button class="button1" type="button" onclick="adicionarImagem()">Adicionar mais Imagens</button>
-                    <button class="button2" type="submit">Cadastrar categoria</button>
+                    <button class="button2" type="submit">Cadastrar produto</button>
                 </div>
             </form>
     </section>
